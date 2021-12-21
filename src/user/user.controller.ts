@@ -27,6 +27,13 @@ export class UserController {
             let updatedDiet=await this.userService.updateUserDiet(userDietDTO);
             return updatedDiet;
     }
+    @Put()
+    async updateUser(@Body() userDTO){
+        let user=await this.userService.updateUser(userDTO);
+         if(user==undefined)
+         throw new HttpException("Invalid User ID", 404)
+        return user;
+    }
 
 
 }

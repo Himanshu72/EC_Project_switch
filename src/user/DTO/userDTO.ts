@@ -6,7 +6,7 @@ export class userDTO{
     Country:String;
     FoodPreference:String;
     Height:Number;
-    Width:Number;
+    Weight:Number;
     Password:String;
 };
 export class userDietDTO{
@@ -14,6 +14,7 @@ export class userDietDTO{
     Dinner:[String];
     Snack:[String];
     Breakfast:[String];
-    _id:String
+    Requiredcalories:Number;
+    _id:String;
 
 };

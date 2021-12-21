@@ -17,7 +17,8 @@ export class AppModule {
     consumer
       .apply(DietMiddleware)
       .forRoutes({ path: '/user/:userID/diet',method:RequestMethod.GET},
-      { path: '/diet',method:RequestMethod.PUT}
+      { path: '/diet',method:RequestMethod.PUT},
+      { path: '/user',method:RequestMethod.PUT}
       );
   } 
 }

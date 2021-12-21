@@ -45,15 +45,20 @@ export class UserService {
         return Math.abs(ageDate.getUTCFullYear() - 1970);
     }    
 
+    calCalaroies(weight,height,age,gender):Number{
+        let cal=(10*weight)+(6.25*height) - (5*age);
+        if(gender=="Male")
+        cal=cal+5;
+        else
+          cal=cal-161;
+      
+         cal=cal*1.4;
+         return cal;
+    }
     async createDefaultDiet(user){
         //calculate calaroes
-         let cal=(10*user.Weight)+(6.25*user.Height) - (5*this.calculateAge(user.DOB));
-          if(user.Gender=="Male")
-            cal=cal+5;
-          else
-            cal=cal-161;
-        
-           cal=cal*1.4;
+        const cal=this.calCalaroies(user.Weight,user.Height,this.calculateAge(user.DOB),user.Gender);
+         
            //End 
          //Tempalate  
         let dietTemplate={
@@ -75,5 +80,12 @@ export class UserService {
     }
     async updateUserDiet(userDiet:userDietDTO){
         return this.dietModel.findOneAndUpdate({_id:userDiet._id},userDiet,{new: true});
+    }
+    async updateUser(user){
+        let newuser= await this.userModel.findOneAndUpdate({_id:user._id},user,{new:true})
+        const cal=this.calCalaroies(newuser.Weight,newuser.Height,this.calculateAge(newuser.DOB),newuser.Gender);
+       let res= await this.dietModel.updateOne({_id:user._id},{Requiredcalories:cal})
+       
+        return newuser;
     }
 }
