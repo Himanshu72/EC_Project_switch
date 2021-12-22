@@ -13,7 +13,7 @@ export class UserController {
     }
     @Post("/login")
     async login(@Body() loginDTO){
-        return this.userService.login(loginDTO.email,loginDTO.Password); 
+        return this.userService.login(loginDTO.Email,loginDTO.Password); 
     } 
     @Get("/:userID/diet")
     async getUserDiet(@Param('userID') userID: string){

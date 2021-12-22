@@ -26,7 +26,7 @@ export class UserService {
         console.log(email,password);
 
         let loginuser= new loginUserDTO();
-     let user=await this.userModel.findOne({email:email});
+     let user=await this.userModel.findOne({Email:email});
         if(user.Password!=password)
             throw new HttpException("Invalid Password",400);
       
